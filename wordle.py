@@ -3,21 +3,24 @@ import json
 from termcolor import colored
 
 class WordleGame(object):
+
+  MAX_ATTEMPTS = 6
+  WORD_LENGTH = 5
+
   def __init__(self):
     self.correct_word = ''
     self.this_word = ''
     self.word_colors = [None] * 5
     self.qwerty_colors = [None] * 26
-    self.tries = 1
-    self.max_tries = 6
+    self.curr_try = 1
     self.qwerty_str = ''
 
   def wordle(self):
     '''runs the entire game - sets a new correct word, gets input from user, shows output to user'''
-    word = requests.get('https://random-word-api.herokuapp.com/word?length=5').text
+    word = requests.get('https://random-word-api.herokuapp.com/word?length=' + str(self.WORD_LENGTH)).text
     self.correct_word = word[2:len(word)-2]
-    while self.tries <= self.max_tries:
-      self.this_word = input(f'Enter your five word guess: Trial {self.tries}: ')
+    while self.curr_try <= self.MAX_ATTEMPTS:
+      self.this_word = input(f'Enter your five word guess: Trial {self.curr_try}: ')
       if not len(self.this_word.rstrip()) == 5:
         print(colored('Only 5 letter words allowed.', color='red'), end='\n\n')
         continue
@@ -27,7 +30,7 @@ class WordleGame(object):
       self.update_letters()
       self.display_word()
       self.update_qwerty()
-      self.tries += 1
+      self.curr_try += 1
       print(self.qwerty_str, end='\n\n')
       if self.this_word == self.correct_word:
         break
@@ -74,7 +77,8 @@ class WordleGame(object):
 
     self.qwerty_str = ''
     for pos, color in enumerate(self.qwerty_colors):
-      self.qwerty_str += ' ' + colored(chr(65+pos), color = color)    
+      self.qwerty_str += ' ' + colored(chr(65+pos), color = color)
 
-wordle = WordleGame()
-wordle.wordle()
+if __name__ == '__main__':
+  wordle = WordleGame()
+  wordle.wordle()
