@@ -8,15 +8,34 @@
 - If a letter is in the word and in the correct spot, the letter will turn green.
 - If a letter is in the word but in the wrong spot, the letter will turn yellow.
 - If the letter is not in the word in any spot, the letter will turn grey.
+## Set Up Instructions
+1. Clone the repo:
+
+```
+$ git clone https://github.com/johnflanagan827/wordle.git
+$ cd wordle
+```
+
+2. Install the dependencies:
+
+```
+$ pip install -r requirements.txt
+```
+
+3. Enjoy the game!
+```
+$ python3 wordle.py
+```
 ## Example
-In command line, run the following `$ python3 wordle.py`.
 The program will ask you to enter a five word guess.
 The following is an example output: 
 
 ![image](https://user-images.githubusercontent.com/69359897/204118959-3f30dffd-ecd2-4939-aaad-3a4bac9a6069.png)
 
-A new 'Wordle' is randomly generated each game.
+A new 'Wordle' word is randomly generated each game.
 ## About
 - The Python termcolor library provides ANSI color formatting for the letters in the terminal.
 - A random word API is used to generate a new 'Wordle' each game.
 - A dictionary API is used to validate each guess by the user.
+## License
+This project is licensed under the MIT License. Feel free to use, modify, and distribute the code as you see fit. See the [LICENSE](file) for more details.
